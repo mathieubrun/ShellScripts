@@ -20,3 +20,6 @@ alias dps='docker ps'
 alias dl='docker logs'
 alias dk='docker kill'
 alias dprune='docker system prune --all --force'
+dbuild() {
+    docker build -t mathieubrun/${PWD##*/}:latest .
+}
