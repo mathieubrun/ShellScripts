@@ -31,7 +31,7 @@ jekyll() {
         -v "${PWD}:/code" \
         -v "${PWD}/.gems:/usr/local/bundle" \
         -p "4000:4000" \
-        mathieubrun/jekyll:latest
+        mathieubrun/jekyll:latest "$@"
 }
 
 figlet() {
