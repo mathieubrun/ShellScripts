@@ -38,3 +38,10 @@ figlet() {
     docker run --rm -ti \
         mathieubrun/figlet:latest "$@"
 }
+
+truffle() {
+    docker run --rm -ti \
+        --workdir "/code" \
+        -v "${PWD}:/code" \
+        mathieubrun/truffle:latest "$@"
+}
