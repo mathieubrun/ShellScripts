@@ -45,3 +45,21 @@ truffle() {
         -v "${PWD}:/code" \
         mathieubrun/truffle:latest "$@"
 }
+
+ganache-cli() {
+    docker run --rm -ti \
+        -p "8545:8545" \
+        mathieubrun/ganache-cli:latest "$@"
+}
+
+npm() {
+    docker run --rm -ti \
+        --workdir '/code' \
+        -v "${PWD}:/code" \
+        node:8.10.0-alpine npm $@
+}
+
+dotnet-add-analysis() {
+    dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
+    dotnet add package StyleCop.Analyzers
+}
