@@ -20,3 +20,23 @@ function figlet() {
     docker run --rm -ti `
         mathieubrun/figlet:latest $args
 }
+
+function truffle() {
+    docker run --rm -ti `
+        --workdir "/code" `
+        -v "${pwd}:/code" `
+        mathieubrun/truffle:latest $args
+}
+
+function ganache-cli() {
+    docker run --rm -ti `
+        -p "8545:8545" `
+        mathieubrun/ganache-cli:latest $args
+}
+
+function npm() {
+    docker run --rm -ti `
+        --workdir '/code' `
+        -v "${pwd}:/code" `
+        node:8.10.0-alpine npm $args
+}
