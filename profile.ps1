@@ -10,8 +10,8 @@ function dprune { docker system prune --all --force }
 function jekyll() {
     docker run --rm -ti `
         --workdir '/code' `
-        -v "${PWD}:/code" `
-        -v "${PWD}\.gems:/usr/local/bundle" `
+        -v "${pwd}:/code" `
+        -v "${pwd}\.gems:/usr/local/bundle" `
         -p "4000:4000" `
         mathieubrun/jekyll:latest $args
 }
