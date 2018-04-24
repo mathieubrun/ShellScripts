@@ -2,9 +2,9 @@
 function glog { git log --oneline --graph }
 
 # docker aliases
-function dps { docker ps }
-function dl { docker logs }
-function dk { docker kill }
+function dps { docker ps $args }
+function dl { docker logs $args }
+function dk { docker kill $args }
 function dprune { docker system prune --all --force }
 
 function jekyll() {
