@@ -59,6 +59,20 @@ npm() {
         node:8.10.0-alpine npm $@
 }
 
+yarn() {
+    docker run --rm -ti \
+        --workdir '/code' \
+        -v "${PWD}:/code" \
+        node:8.10.0-alpine yarn $@
+}
+
+webpack() {
+    docker run --rm -ti \
+        --workdir '/code' \
+        -v "${PWD}:/code" \
+        node:8.10.0-alpine npx webpack $@
+}
+
 dotnet-add-analysis() {
     dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
     dotnet add package StyleCop.Analyzers
