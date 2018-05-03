@@ -40,3 +40,10 @@ function npm() {
         -v "${pwd}:/code" `
         node:8.10.0-alpine npm $args
 }
+
+function dotnet-add-analysis() {
+    dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
+    dotnet add package StyleCop.Analyzers
+    dotnet add package Roslynator.Analyzers
+    dotnet add package SonarAnalyzer.Csharp
+}

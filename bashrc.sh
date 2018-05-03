@@ -25,6 +25,24 @@ dbuild() {
     docker build -t mathieubrun/${PWD##*/}:latest .
 }
 
+dotnet-add-analysis() {
+    dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
+    dotnet add package StyleCop.Analyzers
+    dotnet add package Roslynator.Analyzers
+    dotnet add package SonarAnalyzer.Csharp
+}
+
+figlet() {
+    docker run --rm -ti \
+        mathieubrun/figlet:latest "$@"
+}
+
+ganache-cli() {
+    docker run --rm -ti \
+        -p "8545:8545" \
+        mathieubrun/ganache-cli:latest "$@"
+}
+
 jekyll() {
     docker run --rm -ti \
         --workdir '/code' \
@@ -34,22 +52,11 @@ jekyll() {
         mathieubrun/jekyll:latest "$@"
 }
 
-figlet() {
+magick() {
     docker run --rm -ti \
-        mathieubrun/figlet:latest "$@"
-}
-
-truffle() {
-    docker run --rm -ti \
-        --workdir "/code" \
-        -v "${PWD}:/code" \
-        mathieubrun/truffle:latest "$@"
-}
-
-ganache-cli() {
-    docker run --rm -ti \
-        -p "8545:8545" \
-        mathieubrun/ganache-cli:latest "$@"
+    --workdir '/code' \
+    -v "${PWD}:/code" \
+    mathieubrun/magick:latest "$@"
 }
 
 npm() {
@@ -59,11 +66,11 @@ npm() {
         node:8.10.0-alpine npm $@
 }
 
-yarn() {
+truffle() {
     docker run --rm -ti \
-        --workdir '/code' \
+        --workdir "/code" \
         -v "${PWD}:/code" \
-        node:8.10.0-alpine yarn $@
+        mathieubrun/truffle:latest "$@"
 }
 
 webpack() {
@@ -73,7 +80,9 @@ webpack() {
         node:8.10.0-alpine npx webpack $@
 }
 
-dotnet-add-analysis() {
-    dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
-    dotnet add package StyleCop.Analyzers
+yarn() {
+    docker run --rm -ti \
+        --workdir '/code' \
+        -v "${PWD}:/code" \
+        node:8.10.0-alpine yarn $@
 }
