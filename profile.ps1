@@ -1,3 +1,7 @@
+if ((Test-Path "C:\Program Files\Docker Toolbox\docker-machine.exe")) {
+    & "C:\Program Files\Docker Toolbox\docker-machine.exe" env | Invoke-Expression
+}
+
 # git aliases
 function glog { git log --oneline --graph }
 
