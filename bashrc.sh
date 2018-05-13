@@ -8,8 +8,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export LSCOLORS=ExFxBxDxCxegedabagacad
 fi
 
-alias ll='ls -l'
-alias lla='ls -al'
+alias ll='ls -l -h'
+alias lla='ll -a'
 alias ..='cd ..'
 
 # git aliases
@@ -41,6 +41,16 @@ ganache-cli() {
     docker run --rm -ti \
         -p "8545:8545" \
         mathieubrun/ganache-cli:latest "$@"
+}
+
+gem() {
+    docker run --rm -ti \
+        --workdir '/code' \
+        -v "${PWD}:/code" \
+        -v "${PWD}/.gems:/usr/local/bundle" \
+        -p "4000:4000" \
+        --entrypoint gem \
+        mathieubrun/jekyll:latest "$@"
 }
 
 jekyll() {
