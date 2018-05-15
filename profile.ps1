@@ -1,5 +1,5 @@
 if ((Test-Path "C:\Program Files\Docker Toolbox\docker-machine.exe")) {
-    & "C:\Program Files\Docker Toolbox\docker-machine.exe" env | Invoke-Expression
+    & "C:\Program Files\Docker Toolbox\docker-machine.exe" env --shell powershell | Invoke-Expression
 }
 
 # git aliases
