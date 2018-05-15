@@ -2,11 +2,18 @@
 
 . "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/scripts/z.sh"
 
-# misc
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    export CLICOLOR=1
-    export LSCOLORS=ExFxBxDxCxegedabagacad
-fi
+function color_my_prompt {
+    local __user_and_host="\[\033[01;32m\]\u@\h"
+    local __cur_location="\[\033[01;34m\]\w"
+    local __git_branch_color="\[\033[31m\]"
+    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local __newline="\n"
+    local __prompt_tail="\[\033[35m\]$"
+    local __last_color="\[\033[00m\]"
+    export PS1=" $__cur_location $__git_branch_color$__git_branch$__newline$__prompt_tail$__last_color "
+}
+
+color_my_prompt
 
 alias ll='ls -l -h'
 alias lla='ll -a'
