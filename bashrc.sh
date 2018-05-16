@@ -4,6 +4,8 @@ CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 source "$CURRENT/references/z/z.sh"
 
+alias ls='ls --group-directories-first --color'
+
 # ls colors
 if [[ "$OSTYPE" == "darwin"* ]]; then
     alias ls='gls --group-directories-first --color'
