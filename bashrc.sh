@@ -1,6 +1,16 @@
 #/bin/bash
 
-. "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/scripts/z.sh"
+CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+source "$CURRENT/references/z/z.sh"
+
+# ls colors
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias ls='gls --group-directories-first --color'
+    alias dircolors='gdircolors'
+fi
+
+export LS_COLORS="di=36:ln=35:so=31;1;44:pi=30;1;44:ex=1;31:bd=0;1;44:cd=37;1;44:su=37;1;41:sg=30;1;43:tw=30;1;42:ow=30;1;43"
 
 function color_my_prompt {
     local __user_and_host="\[\033[01;32m\]\u@\h"
