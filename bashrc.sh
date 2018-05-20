@@ -6,14 +6,23 @@ source "$CURRENT/references/z/z.sh"
 
 alias ls='ls --group-directories-first --color'
 
-# ls colors
+# mac os specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
+
+    # vs code
+    VS_CODE_DIR="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    if [ -e "$VS_CODE_DIR" ]; then
+        export PATH="$PATH:$VS_CODE_DIR"
+    fi
+
+    # ls
     alias ls='gls --group-directories-first --color'
     alias dircolors='gdircolors'
 fi
 
 export LS_COLORS="di=36:ln=35:so=31;1;44:pi=30;1;44:ex=1;31:bd=0;1;44:cd=37;1;44:su=37;1;41:sg=30;1;43:tw=30;1;42:ow=30;1;43"
 
+# git prompt
 function color_my_prompt {
     local __user_and_host="\[\033[01;32m\]\u@\h"
     local __cur_location="\[\033[01;34m\]\w"
@@ -27,14 +36,20 @@ function color_my_prompt {
 
 color_my_prompt
 
+# command line
 alias ll='ls -l -h'
 alias lla='ll -a'
 alias ..='cd ..'
 
-# git aliases
+# git
 alias glog='git log --oneline --graph'
+gclone() {
+    if [ $# -eq 2 ]; then
+        git clone https://github.com/$1/$2 --output ~/github/$1/$2
+    fi
+}
 
-# docker aliases
+# docker
 alias dps='docker ps'
 alias dl='docker logs'
 alias dk='docker kill'
@@ -44,6 +59,7 @@ dbuild() {
     docker build -t mathieubrun/${PWD##*/}:latest .
 }
 
+# dotnet
 dotnet-add-analysis() {
     dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
     dotnet add package StyleCop.Analyzers
@@ -51,6 +67,7 @@ dotnet-add-analysis() {
     dotnet add package SonarAnalyzer.Csharp
 }
 
+# docker images
 figlet() {
     docker run --rm -ti \
         mathieubrun/figlet:latest "$@"
