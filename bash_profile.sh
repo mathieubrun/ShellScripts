@@ -1,10 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-CURRENT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+export SHELL_SCRIPTS_PATH=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-source "$CURRENT/references/z/z.sh"
-
-alias ls='ls --group-directories-first --color'
+alias ls='LC_COLLATE=C ls --group-directories-first --color'
 
 # mac os specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -16,38 +14,39 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 
     # ls
-    alias ls='gls --group-directories-first --color'
-    alias dircolors='gdircolors'
+    alias ls='LC_COLLATE=C gls --group-directories-first --color'
 fi
 
 export LS_COLORS="di=36:ln=35:so=31;1;44:pi=30;1;44:ex=1;31:bd=0;1;44:cd=37;1;44:su=37;1;41:sg=30;1;43:tw=30;1;42:ow=30;1;43"
 
-# git prompt
-function color_my_prompt {
-    local __user_and_host="\[\033[01;32m\]\u@\h"
-    local __cur_location="\[\033[01;34m\]\w"
-    local __git_branch_color="\[\033[31m\]"
-    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
-    local __newline="\n"
-    local __prompt_tail="\[\033[35m\]$"
-    local __last_color="\[\033[00m\]"
-    export PS1=" $__cur_location $__git_branch_color$__git_branch$__newline$__prompt_tail$__last_color "
-}
-
-color_my_prompt
-
-# command line
+# bash aliases
 alias ll='ls -l -h'
 alias lla='ll -a'
 alias ..='cd ..'
 
 # git
 alias glog='git log --oneline --graph'
+
 gclone() {
     if [ $# -eq 2 ]; then
-        git clone https://github.com/$1/$2 --output ~/github/$1/$2
+        git clone https://github.com/$1/$2 ~/github/$1/$2 && cd ~/github/$1/$2
     fi
 }
+
+## prompt
+function color_my_prompt {
+    local __user_and_host="\[\033[01;32m\]\u@\h"
+    local __cur_location="\[\033[01;34m\]\w"
+    local __git_branch_color="\[\033[31m\]"
+    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local __git_changes=''
+    local __newline="\n"
+    local __prompt_tail="\[\033[35m\]$"
+    local __last_color="\[\033[00m\]"
+    export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__newline$__prompt_tail$__last_color "
+}
+
+color_my_prompt
 
 # docker
 alias dps='docker ps'
@@ -57,6 +56,10 @@ alias dprune='docker system prune --all --force'
 
 dbuild() {
     docker build -t mathieubrun/${PWD##*/}:latest .
+}
+
+dbash() {
+    docker run --rm -ti -v "$SHELL_SCRIPTS_PATH/bash_profile.sh:/__scripts/bash_profile.sh" --entrypoint bash $1 --rcfile /__scripts/bash_profile.sh
 }
 
 # dotnet
