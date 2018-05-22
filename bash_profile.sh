@@ -3,6 +3,8 @@
 export SHELL_SCRIPTS_PATH=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
 alias ls='LC_COLLATE=C ls --group-directories-first --color'
+
+# windows specific
 if [[ "$OSTYPE" == "msys"* ]]; then
     # https://github.com/docker/toolbox/issues/371
     export MSYS_NO_PATHCONV=1
