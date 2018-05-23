@@ -4,6 +4,7 @@ if ((Test-Path "C:\Program Files\Docker Toolbox\docker-machine.exe")) {
 
 # git aliases
 function glog { git log --oneline --graph }
+function gstatus { git status --porcelain }
 
 # docker aliases
 function dps { docker ps $args }
