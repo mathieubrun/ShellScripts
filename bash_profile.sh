@@ -42,11 +42,13 @@ gclone() {
 
 ## prompt
 function __git_changes() {
-    if [ -n "$(git status 2> /dev/null --porcelain)" ]; then
-        local __A=$(git status 2> /dev/null --porcelain | awk '/^ A/ {print $2}' | wc -l | awk '{print $1}')
-        local __D=$(git status 2> /dev/null --porcelain | awk '/^ D/ {print $2}' | wc -l | awk '{print $1}')
-        local __M=$(git status 2> /dev/null --porcelain | awk '/^ M/ {print $2}' | wc -l | awk '{print $1}')
-        local __U=$(git status 2> /dev/null --porcelain | awk '/\?\?/ {print $2}' | wc -l | awk '{print $1}')
+    local __changes=$(git status 2> /dev/null --porcelain)
+
+    if [ -n "$__changes" ]; then
+        local __A=$(echo "$__changes" | awk '/^ A/ {print $2}' | wc -l | awk '{print $1}')
+        local __D=$(echo "$__changes" | awk '/^ D/ {print $2}' | wc -l | awk '{print $1}')
+        local __M=$(echo "$__changes" | awk '/^ M/ {print $2}' | wc -l | awk '{print $1}')
+        local __U=$(echo "$__changes" | awk '/\?\?/ {print $2}' | wc -l | awk '{print $1}')
 
         if [ $__A -ne "0" ]; then
             echo -n $" +$__A"
