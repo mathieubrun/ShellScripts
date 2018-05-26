@@ -68,13 +68,14 @@ function __git_changes() {
 function color_my_prompt {
     local __user_and_host="\[\033[01;32m\]\u@\h"
     local __cur_location="\[\033[01;34m\]\w"
+    [ -n "$__CONTAINER_NAME" ]; local __docker="\[\033[01;32m\]$__CONTAINER_NAME"
     local __git_branch_color="\[\033[31m\]"
     local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\/`'
     local __git_changes='`__git_changes`'
     local __newline="\n"
     local __prompt_tail="\[\033[35m\]$"
     local __last_color="\[\033[00m\]"
-    export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__git_changes$__newline$__prompt_tail$__last_color "
+    export PS1="$__docker $__user_and_host $__cur_location $__git_branch_color$__git_branch$__git_changes$__newline$__prompt_tail$__last_color "
 }
 
 color_my_prompt
@@ -90,7 +91,7 @@ dbuild() {
 }
 
 dbash() {
-    docker run --rm -ti -v "$SHELL_SCRIPTS_PATH/bash_profile.sh:/__scripts/bash_profile.sh" --entrypoint bash $1 --rcfile /__scripts/bash_profile.sh
+    docker run --rm -ti -v "$SHELL_SCRIPTS_PATH/bash_profile.sh:/__scripts/bash_profile.sh" --env __CONTAINER_NAME="$1" --entrypoint bash $1 --rcfile /__scripts/bash_profile.sh
 }
 
 # dotnet
