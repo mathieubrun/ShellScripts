@@ -30,7 +30,8 @@ alias gstatus='git status --porcelain'
 
 gclone() {
     if [ $# -eq 2 ]; then
-        git clone https://github.com/$1/$2 ~/github/$1/$2 && cd ~/github/$1/$2
+        cd ~/github
+        git clone https://github.com/$1/$2 $1/$2 && cd ~/github/$1/$2
     fi
 }
 
