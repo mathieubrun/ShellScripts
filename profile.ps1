@@ -10,7 +10,11 @@ function gstatus { git status --porcelain }
 function dps { docker ps $args }
 function dl { docker logs $args }
 function dk { docker kill $args }
-function dprune { docker system prune --all --force }
+function dprune 
+{ 
+    docker system prune --all --force 
+    docker volume prune --force
+}
 
 function dbash() {
     docker run --rm -ti -v "$PSScriptRoot:/__scripts" --entrypoint bash $1 --rcfile /__scripts/bashrc.sh
