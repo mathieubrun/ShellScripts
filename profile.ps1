@@ -17,7 +17,7 @@ function dprune
 }
 
 function dbash() {
-    docker run --rm -ti -v "$PSScriptRoot:/__scripts" --entrypoint bash $1 --rcfile /__scripts/bashrc.sh
+    docker run --rm -ti -v "${PSScriptRoot}:/__scripts" --entrypoint bash $1 --rcfile /__scripts/bashrc.sh
 }
 
 function jekyll() {

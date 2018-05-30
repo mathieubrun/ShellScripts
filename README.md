@@ -6,7 +6,7 @@ Assuming you cloned this repository in `Documents/Github` folder.
 Edit .bash_profile and add :
 
 ```` sh
-. ~/Documents/github/ShellScripts/bashrc.sh
+. ~/github/shell-scripts/bash_profile.sh
 ````
 
 ## Powershell
@@ -22,5 +22,5 @@ notepad $Profile
 And add :
 
 ```` powershell
-. "$([Environment]::GetFolderPath('MyDocuments'))\Github\ShellScripts\profile.ps1"
+. "$home\github\shell-scripts\profile.ps1"
 ````
