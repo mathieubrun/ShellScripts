@@ -12,7 +12,7 @@ function dl { docker logs $args }
 function dk { docker kill $args }
 function dprune 
 { 
-    docker image prune --force 
+    docker image prune --force --all
     docker network prune --force 
     docker volume prune --force
 }
