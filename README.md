@@ -22,5 +22,5 @@ notepad $Profile
 And add :
 
 ```` powershell
-. "$home\github\shell-scripts\profile.ps1"
+. "$home\github\mathieubrun\shell-scripts\profile.ps1"
 ````
