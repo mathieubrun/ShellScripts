@@ -81,7 +81,8 @@ alias dl='docker logs'
 alias dk='docker kill'
 
 dprune() {
-    docker system prune --all --force
+    docker image prune --force 
+    docker network prune --force 
     docker volume prune --force
 }
 

@@ -12,7 +12,8 @@ function dl { docker logs $args }
 function dk { docker kill $args }
 function dprune 
 { 
-    docker system prune --all --force 
+    docker image prune --force 
+    docker network prune --force 
     docker volume prune --force
 }
 
