@@ -1,5 +1,7 @@
 #!/bin/sh
 
+shopt -s no_empty_cmd_completion
+
 export SHELL_SCRIPTS_PATH=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
 alias ls='LC_COLLATE=C ls --group-directories-first --color'
@@ -102,68 +104,6 @@ dotnet-add-analysis() {
     dotnet add package SonarAnalyzer.Csharp
 }
 
-# docker images
-figlet() {
-    docker run --rm -ti \
-        mathieubrun/figlet:latest "$@"
-}
-
-ganache-cli() {
-    docker run --rm -ti \
-        -p "8545:8545" \
-        mathieubrun/ganache-cli:latest "$@"
-}
-
-gem() {
-    docker run --rm -ti \
-        --workdir '/code' \
-        -v "${PWD}:/code" \
-        -v "${PWD}/.gems:/usr/local/bundle" \
-        -p "4000:4000" \
-        --entrypoint gem \
-        mathieubrun/jekyll:latest "$@"
-}
-
-jekyll() {
-    docker run --rm -ti \
-        --workdir '/code' \
-        -v "${PWD}:/code" \
-        -v "${PWD}/.gems:/usr/local/bundle" \
-        -p "4000:4000" \
-        mathieubrun/jekyll:latest "$@"
-}
-
-magick() {
-    docker run --rm -ti \
-    --workdir '/code' \
-    -v "${PWD}:/code" \
-    mathieubrun/magick:latest "$@"
-}
-
-npm() {
-    docker run --rm -ti \
-        --workdir '/code' \
-        -v "${PWD}:/code" \
-        node:8.10.0-alpine npm $@
-}
-
-truffle() {
-    docker run --rm -ti \
-        --workdir "/code" \
-        -v "${PWD}:/code" \
-        mathieubrun/truffle:latest "$@"
-}
-
-webpack() {
-    docker run --rm -ti \
-        --workdir '/code' \
-        -v "${PWD}:/code" \
-        node:8.10.0-alpine npx webpack $@
-}
-
-yarn() {
-    docker run --rm -ti \
-        --workdir '/code' \
-        -v "${PWD}:/code" \
-        node:8.10.0-alpine yarn $@
-}
+if [ -f "$SHELL_SCRIPTS_PATH/bash_docker.sh" ]; then
+    . "$SHELL_SCRIPTS_PATH/bash_docker.sh"
+fi
