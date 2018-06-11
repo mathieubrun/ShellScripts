@@ -45,6 +45,14 @@ npm() {
         node:8.10.0-alpine npm $@
 }
 
+rsync() {
+    docker run --rm -ti \
+        --workdir /__work \
+        -v "${HOME}/.ssh:/root/.ssh" \
+        -v "$(pwd):/__work" \
+        mathieubrun/rsync:latest $@
+}
+
 truffle() {
     docker run --rm -ti \
         --workdir "/code" \
