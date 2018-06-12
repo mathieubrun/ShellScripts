@@ -5,12 +5,14 @@ figlet() {
     docker run --rm -ti \
         mathieubrun/figlet:latest "$@"
 }
+export -f figlet
 
 ganache-cli() {
     docker run --rm -ti \
         -p "8545:8545" \
         mathieubrun/ganache-cli:latest "$@"
 }
+export -f ganache-cli
 
 gem() {
     docker run --rm -ti \
@@ -21,6 +23,7 @@ gem() {
         --entrypoint gem \
         mathieubrun/jekyll:latest "$@"
 }
+export -f gem
 
 jekyll() {
     docker run --rm -ti \
@@ -30,6 +33,7 @@ jekyll() {
         -p "4000:4000" \
         mathieubrun/jekyll:latest "$@"
 }
+export -f jekyll
 
 magick() {
     docker run --rm -ti \
@@ -37,6 +41,7 @@ magick() {
     -v "${PWD}:/code" \
     mathieubrun/magick:latest "$@"
 }
+export -f magick
 
 npm() {
     docker run --rm -ti \
@@ -44,6 +49,7 @@ npm() {
         -v "${PWD}:/code" \
         node:8.10.0-alpine npm $@
 }
+export -f npm
 
 rsync() {
     docker run --rm -ti \
@@ -52,6 +58,7 @@ rsync() {
         -v "$(pwd):/__work" \
         mathieubrun/rsync:latest $@
 }
+export -f rsync
 
 truffle() {
     docker run --rm -ti \
@@ -59,6 +66,7 @@ truffle() {
         -v "${PWD}:/code" \
         mathieubrun/truffle:latest "$@"
 }
+export -f truffle
 
 webpack() {
     docker run --rm -ti \
@@ -66,6 +74,7 @@ webpack() {
         -v "${PWD}:/code" \
         node:8.10.0-alpine npx webpack $@
 }
+export -f webpack
 
 yarn() {
     docker run --rm -ti \
@@ -73,3 +82,4 @@ yarn() {
         -v "${PWD}:/code" \
         node:8.10.0-alpine yarn $@
 }
+export -f yarn
