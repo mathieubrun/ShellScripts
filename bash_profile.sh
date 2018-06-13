@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 shopt -s no_empty_cmd_completion
 
@@ -10,7 +10,7 @@ alias ls='LC_COLLATE=C ls --group-directories-first --color'
 if [ "$OSTYPE" == "msys" ]; then
 
     if [ -n "$(type -t docker)" ] && [ "$(type -t docker)" = file ]; then
-        docker () {
+        docker() {
             MSYS_NO_PATHCONV=1 docker.exe "$@"
         }
         export -f docker
@@ -18,7 +18,7 @@ if [ "$OSTYPE" == "msys" ]; then
 fi
 
 # mac os specific
-if [ "$OSTYPE" == "darwin"* ]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # vs code
     VS_CODE_DIR="/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -28,8 +28,11 @@ if [ "$OSTYPE" == "darwin"* ]; then
 
     # ls
     alias ls='LC_COLLATE=C gls --group-directories-first --color'
-    sed() { gsed $@ }
-    export -f sed    
+    
+    sed() {
+        sed $@
+    }
+    export -f sed   
 fi
 
 export LS_COLORS="di=36:ln=35:so=31;1;44:pi=30;1;44:ex=1;31:bd=0;1;44:cd=37;1;44:su=37;1;41:sg=30;1;43:tw=30;1;42:ow=30;1;43"
