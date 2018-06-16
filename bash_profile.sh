@@ -30,7 +30,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias ls='LC_COLLATE=C gls --group-directories-first --color'
     
     sed() {
-        sed $@
+        gsed $@
     }
     export -f sed   
 fi
@@ -83,7 +83,7 @@ function color_my_prompt {
     local __cur_location="\[\033[01;34m\]\w"
     [ -n "$__CONTAINER_NAME" ]; local __docker="\[\033[01;32m\]$__CONTAINER_NAME"
     local __git_branch_color="\[\033[31m\]"
-    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\/`'
+    local __git_branch='`git rev-parse --abbrev-ref HEAD 2> /dev/null`'
     local __git_changes='`__git_changes`'
     local __newline="\n"
     local __prompt_tail="\[\033[35m\]$"
