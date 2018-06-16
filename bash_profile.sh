@@ -123,3 +123,7 @@ dotnet-add-analysis() {
 if [ -f "$SHELL_SCRIPTS_PATH/bash_docker.sh" ]; then
     . "$SHELL_SCRIPTS_PATH/bash_docker.sh"
 fi
+
+if [ -f "$SHELL_SCRIPTS_PATH/bash_pi.sh" ]; then
+    . "$SHELL_SCRIPTS_PATH/bash_pi.sh"
+fi
