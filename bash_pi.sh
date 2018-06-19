@@ -8,7 +8,7 @@ pi-ssh() {
         host="192.168.1.$1"
     fi
 
-    ssh pi@${host}
+    ssh -i ~/.ssh/pi pi@${host}
 }
 
 pi-ssh-copy() {
