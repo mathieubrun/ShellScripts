@@ -54,41 +54,17 @@ gclone() {
 }
 
 ## prompt
-function __git_changes() {
-    local __changes=$(git status 2> /dev/null --porcelain)
-
-    if [ -n "$__changes" ]; then
-        local __A=$(echo "$__changes" | awk '/^ A/ {print $2}' | wc -l | awk '{print $1}')
-        local __D=$(echo "$__changes" | awk '/^ D/ {print $2}' | wc -l | awk '{print $1}')
-        local __M=$(echo "$__changes" | awk '/^ M/ {print $2}' | wc -l | awk '{print $1}')
-        local __U=$(echo "$__changes" | awk '/\?\?/ {print $2}' | wc -l | awk '{print $1}')
-
-        if [ $__A -ne "0" ]; then
-            echo -n $" +$__A"
-        fi
-        if [ $__D -ne "0" ]; then
-            echo -n $" -$__D"
-        fi
-        if [ $__M -ne "0" ]; then
-            echo -n $" !$__M"
-        fi
-        if [ $__U -ne "0" ]; then
-            echo -n $" ?$__U"
-        fi
-    fi
-}
 
 function color_my_prompt {
     local __user_and_host="\[\033[01;32m\]\u@\h"
     local __cur_location="\[\033[01;34m\]\w"
     [ -n "$__CONTAINER_NAME" ]; local __docker="\[\033[01;32m\]$__CONTAINER_NAME"
     local __git_branch_color="\[\033[31m\]"
-    local __git_branch='`git rev-parse --abbrev-ref HEAD 2> /dev/null`'
-    local __git_changes='`__git_changes`'
+    local __git_branch='`git symbolic-ref --short HEAD 2>/dev/null`'
     local __newline="\n"
     local __prompt_tail="\[\033[35m\]$"
     local __last_color="\[\033[00m\]"
-    export PS1="$__docker $__user_and_host $__cur_location $__git_branch_color$__git_branch$__git_changes$__newline$__prompt_tail$__last_color "
+    export PS1="$__docker $__user_and_host $__cur_location $__git_branch_color$__git_branch$__newline$__prompt_tail$__last_color "
 }
 
 color_my_prompt
