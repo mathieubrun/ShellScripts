@@ -28,11 +28,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # ls
     alias ls='LC_COLLATE=C gls --group-directories-first --color'
-    
-    sed() {
-        gsed $@
-    }
-    export -f sed   
 fi
 
 export LS_COLORS="di=36:ln=35:so=31;1;44:pi=30;1;44:ex=1;31:bd=0;1;44:cd=37;1;44:su=37;1;41:sg=30;1;43:tw=30;1;42:ow=30;1;43"
@@ -89,7 +84,7 @@ dbash() {
 }
 
 # dotnet
-dotnet-add-analysis() {
+dotnet_add_analysis() {
     dotnet add package Microsoft.CodeAnalysis.FxCopAnalyzers
     dotnet add package StyleCop.Analyzers
     dotnet add package Roslynator.Analyzers
@@ -97,9 +92,9 @@ dotnet-add-analysis() {
 }
 
 if [ -f "$SHELL_SCRIPTS_PATH/bash_docker.sh" ]; then
-    . "$SHELL_SCRIPTS_PATH/bash_docker.sh"
+    source "$SHELL_SCRIPTS_PATH/bash_docker.sh"
 fi
 
 if [ -f "$SHELL_SCRIPTS_PATH/bash_pi.sh" ]; then
-    . "$SHELL_SCRIPTS_PATH/bash_pi.sh"
+    source "$SHELL_SCRIPTS_PATH/bash_pi.sh"
 fi

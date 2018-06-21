@@ -1,32 +1,17 @@
 #!/bin/bash
 
-set -a
-
-pi-ssh() {
-    local host=raspberrypi.local
-    if [[ $1 ]]; then
-        host="192.168.1.$1"
+pi_ssh_copy_keys() {
+    if [[ ! -f ~/.ssh/pi.pub ]]; then
+        ssh-keygen -b 2048 -t rsa -f ~/.ssh/pi -q -N ""
     fi
 
-    ssh -i ~/.ssh/pi pi@${host}
+    ssh-copy-id -i ~/.ssh/pi.pub pi@$1
 }
 
-pi-ssh-copy() {
-    local host=raspberrypi.local
-    if [[ $1 ]]; then
-        host="192.168.1.$1"
-    fi
-
-    cat ~/.ssh/pi.pub | ssh pi@${host} 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+pi_docker_copy() {
+    docker save $1 | gzip | ssh $2 'docker load'
 }
 
-pi-halt() {
-    local host=raspberrypi.local
-    if [[ $1 ]]; then
-        host="192.168.1.$1"
-    fi
-
-    cat ~/.ssh/pi.pub | ssh pi@${host} 'sudo halt'
+pi_halt() {
+    ssh $1 'sudo halt'
 }
-
-set +a
