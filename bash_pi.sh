@@ -15,3 +15,12 @@ pi_docker_copy() {
 pi_halt() {
     ssh $1 'sudo halt'
 }
+
+pi_change_hostname() {
+    ssh -t $1 NEW_HOST=$2 'bash -s' <<'ENDSSH'
+sudo sed -i "s/$(hostname)/$NEW_HOST/g" /etc/hostname
+sudo sed -i "s/$(hostname)/$NEW_HOST/g" /etc/hosts
+sudo hostnamectl set-hostname "$NEW_HOST"
+sudo systemctl restart avahi-daemon
+ENDSSH
+}
