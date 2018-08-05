@@ -42,9 +42,9 @@ alias glog='git log --oneline --graph'
 alias gstatus='git status --porcelain'
 
 gclone() {
-    if [ $# -eq 2 ]; then
+    if [ $# -eq 1 ]; then
         cd ~/github
-        git clone https://github.com/$1/$2 $1/$2 && cd ~/github/$1/$2
+        git clone https://github.com/$1 && cd ~/github/$1
     fi
 }
 
