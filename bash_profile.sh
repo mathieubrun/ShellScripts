@@ -44,7 +44,7 @@ alias gstatus='git status --porcelain'
 gclone() {
     if [ $# -eq 1 ]; then
         cd ~/github
-        git clone https://github.com/$1 && cd ~/github/$1
+        git clone https://github.com/$1 ~/github/$1 && cd ~/github/$1
     fi
 }
 
