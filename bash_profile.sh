@@ -98,3 +98,7 @@ fi
 if [ -f "$SHELL_SCRIPTS_PATH/bash_pi.sh" ]; then
     source "$SHELL_SCRIPTS_PATH/bash_pi.sh"
 fi
+
+if [ -f "$SHELL_SCRIPTS_PATH/submodules/z/z.sh" ]; then
+    source "$SHELL_SCRIPTS_PATH/submodules/z/z.sh"
+fi
